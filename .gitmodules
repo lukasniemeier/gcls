@@ -1,0 +1,3 @@
+[submodule "gcls-receiver"]
+	path = gcls-receiver
+	url = git@github.com:lukasniemeier/gcls-receiver.git
