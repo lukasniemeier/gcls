@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    card_view:cardCornerRadius="4dp"
+    android:clickable="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/logo_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/away_team_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_weight="0.3"
+                android:src="@drawable/ic_launcher"
+                android:layout_margin="6dp" />
+
+            <TextView
+                android:id="@+id/time_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:gravity="center"
+                android:text="19:00"
+                style="@style/Base.TextAppearance.AppCompat.Headline" />
+
+            <ImageView
+                android:id="@+id/home_team_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_weight="0.3"
+                android:src="@drawable/ic_launcher"
+                android:layout_margin="6dp" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/separator_container"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/logo_container"
+            android:background="@color/background_floating_material_light"/>
+
+        <LinearLayout
+            android:id="@+id/team_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/separator_container"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/away_team_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center_horizontal|left"
+                style="@style/Base.TextAppearance.AppCompat.Headline"
+                android:text="Bruins"
+                android:autoText="true"
+                android:paddingLeft="6dp" />
+
+            <TextView
+                android:id="@+id/home_team_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center_horizontal|right"
+                style="@style/Base.TextAppearance.AppCompat.Headline"
+                android:text="Rangers"
+                android:paddingRight="6dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/city_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/team_container"
+            android:layout_above="@+id/progress_text"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/away_team_sub_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center_horizontal|left"
+                android:text="Boston"
+                android:paddingLeft="6dp"
+                android:paddingBottom="6dp" />
+
+            <TextView
+                android:id="@+id/home_team_sub_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center_horizontal|right"
+                android:text="New York"
+                android:paddingRight="6dp"
+                android:paddingBottom="6dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/progress_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Loading..."
+            android:visibility="gone"
+            android:background="@color/theme_blue_dark"
+            android:textColor="@color/abc_secondary_text_material_dark"
+            android:padding="6dp" />
+    </RelativeLayout>
+
+
+
+</android.support.v7.widget.CardView>

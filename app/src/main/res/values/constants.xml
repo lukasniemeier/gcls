@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="receiver_application_id">RECEIVER_ID</string>
+    <string name="user_agent">Mozilla/5.0 AppleTV</string>
+    <string name="receiver_data_channel">urn:x-cast:de.lukasniemeier.gamecenterlivesender</string>
+    <string name="teams_url">http://smb.cdnak.neulion.com/config/nhl/gc1415/feeds/teams.json</string>
+    <string name="games_url">http://f.nhl.com/livescores/nhl/leagueapp/20142015/scores/%1$s_O2T1.json</string>
+    <string name="login_url">https://gamecenter.nhl.com/nhlgc/secure/login</string>
+    <string name="pp_url"><![CDATA[http://gamecenter.nhl.com/nhlgc/servlets/publishpoint?type=game&id=%1$d&gs=%2$s&ft=%3$s&nt=1]]></string>
+</resources>

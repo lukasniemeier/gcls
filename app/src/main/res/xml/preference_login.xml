@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:key="preference_user"
+        android:title="GameCenter Live User"
+        android:summary="Not set"
+        android:inputType="text"
+        android:defaultValue="" />
+    <EditTextPreference
+        android:key="preference_password"
+        android:title="GameCenter Live Password"
+        android:summary="Not set"
+        android:inputType="textPassword"
+        android:defaultValue="" />
+
+</PreferenceScreen>

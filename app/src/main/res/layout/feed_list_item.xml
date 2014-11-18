@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/md_dialog_frame_margin"
+    android:paddingRight="@dimen/md_dialog_frame_margin"
+    android:clickable="true"
+    android:background="#fefefe">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/md_listitem_height"
+        android:id="@+id/team_icon"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="Logo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minHeight="@dimen/md_listitem_height"
+        android:textSize="@dimen/md_listitem_textsize"
+        tools:text="Boston Bruins"
+        android:id="@+id/feed_name"
+        android:layout_gravity="right"
+        android:gravity="center_vertical|left"
+        android:layout_marginLeft="6dp"
+        style="@style/TextAppearance.AppCompat.Large" />
+</LinearLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preference-headers
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <header
+        android:fragment="de.lukasniemeier.gamecenterlivesender.view.SettingsActivity$LoginPreferenceFragment"
+        android:title="Login"
+        android:summary="NHL GameCenter Live login credentials." />
+
+</preference-headers>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GameCenterLive Sender</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="error_downloading_teams">Error downloading team information</string>
+    <string name="error_parse_pp">Unable to parse publish point</string>
+    <string name="error_missing_feed">No live video found (yet)</string>
+    <string name="error_cast_generic">Unable to cast video</string>
+    <string name="error_unable_login">Unable to login</string>
+    <string name="error_error">Error: %1$s</string>
+    <string name="stream_sub_info">NHLGC</string>
+
+</resources>

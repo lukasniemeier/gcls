@@ -1,0 +1,18 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="GCLSenderAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Set AppCompat’s actionBarStyle -->
+        <item name="actionBarStyle">@style/GCLSenderActionBarStyle</item>
+
+        <!-- Set AppCompat’s color theming attrs !-->
+        <item name="colorPrimary">@color/theme_blue</item>
+        <item name="colorPrimaryDark">@color/theme_blue_dark</item>
+    </style>
+
+    <style name="GCLSenderActionBarStyle" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="displayOptions">useLogo|showHome</item>
+        <item name="logo">@drawable/ic_launcher</item>
+    </style>
+
+</resources>
