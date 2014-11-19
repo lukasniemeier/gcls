@@ -17,7 +17,7 @@ import java.util.TimeZone;
 
 public class CoreApplication extends Application {
 
-    public static final double VOLUME_INCREMENT = 0.05;
+    public static final double VOLUME_INCREMENT = 0.1;
     public static String USER_AGENT;
     public static String APPLICATION_ID;
 

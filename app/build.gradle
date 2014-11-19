@@ -3,7 +3,7 @@ apply plugin: 'retrolambda'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "19.1.0"
+    buildToolsVersion "21.1.1"
 
     defaultConfig {
         applicationId "de.lukasniemeier.gamecenterlivesender"
@@ -11,6 +11,7 @@ android {
         targetSdkVersion 19
         versionCode 1
         versionName "1.0"
+        apply from: file('config.gradle'), to: defaultConfig
     }
     buildTypes {
         release {

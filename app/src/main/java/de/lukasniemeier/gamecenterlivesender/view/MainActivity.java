@@ -45,6 +45,7 @@ import java.net.HttpCookie;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.lukasniemeier.gamecenterlivesender.BuildConfig;
 import de.lukasniemeier.gamecenterlivesender.CoreApplication;
 import de.lukasniemeier.gamecenterlivesender.R;
 import de.lukasniemeier.gamecenterlivesender.data.InMemoryDataManager;
@@ -290,7 +291,7 @@ public class MainActivity extends ActionBarActivity {
         Functional.Consumer<String> startCastingFunc = path -> startCasting(game, path);
 
         TaskFactory factory = new TaskFactory(this, restClient, statusBar);
-        HttpTask login = factory.createLoginTask("USERNAME", "PASSWORD",
+        HttpTask login = factory.createLoginTask(BuildConfig.GCL_USER, BuildConfig.GCL_PASSWORD,
                 factory.createPublishTask(publishPointUrl, startCastingFunc));
         HttpTask publish1st = factory.createPublishTaskWithFallback(login, publishPointUrl,
                 startCastingFunc);
