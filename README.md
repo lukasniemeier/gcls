@@ -22,6 +22,11 @@ Take the following steps to build and deploy the application:
  * Use *app/config.gradle.template* to create a *app/config.gradle* fitting your *Application ID* and Gamecenter Live subscription
  * Build and deploy the APK
 
+Security Considerations
+--------------------------------
+
+Currently the app stores your Gamecenter Live subscription in plain text (see build instructions).
+
 Referenced libraries
 --------------------------------
 
