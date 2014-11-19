@@ -150,7 +150,6 @@ public class MainActivity extends ActionBarActivity {
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
-        toolbar.setLogo(R.drawable.ic_launcher);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
