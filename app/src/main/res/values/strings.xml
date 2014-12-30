@@ -16,5 +16,7 @@
     <string name="live">Live</string>
     <string name="proxy">Proxy</string>
     <string name="url">URL</string>
+    <string name="select_feed">Select Feed</string>
+    <string name="logo">Logo</string>
 
 </resources>

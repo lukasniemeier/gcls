@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     card_view:cardCornerRadius="4dp"
-    android:clickable="true">
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,7 +26,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_weight="0.3"
-                android:layout_margin="6dp" />
+                android:layout_margin="6dp"
+                android:contentDescription="@string/logo" />
 
             <TextView
                 android:id="@+id/time_text"
@@ -33,7 +35,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.3"
                 android:gravity="center"
-                android:text="19:00"
                 style="@style/Base.TextAppearance.AppCompat.Headline" />
 
             <ImageView
@@ -41,7 +42,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_weight="0.3"
-                android:layout_margin="6dp" />
+                android:layout_margin="6dp"
+                android:contentDescription="@string/logo" />
 
         </LinearLayout>
 
@@ -64,21 +66,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:gravity="center_horizontal|left"
+                android:gravity="center_horizontal|start"
                 style="@style/Base.TextAppearance.AppCompat.Headline"
-                android:text="Bruins"
-                android:autoText="true"
-                android:paddingLeft="6dp" />
+                android:paddingStart="6dp"
+                android:paddingEnd="0dp"/>
 
             <TextView
                 android:id="@+id/home_team_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:gravity="center_horizontal|right"
+                android:gravity="center_horizontal|end"
                 style="@style/Base.TextAppearance.AppCompat.Headline"
-                android:text="Rangers"
-                android:paddingRight="6dp" />
+                android:paddingStart="0dp"
+                android:paddingEnd="6dp" />
 
         </LinearLayout>
 
@@ -95,9 +96,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:gravity="center_horizontal|left"
-                android:text="Boston"
-                android:paddingLeft="6dp"
+                android:gravity="center_horizontal|start"
+                android:paddingStart="6dp"
+                android:paddingEnd="0dp"
                 android:paddingBottom="6dp" />
 
             <TextView
@@ -105,9 +106,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:gravity="center_horizontal|right"
-                android:text="New York"
-                android:paddingRight="6dp"
+                android:gravity="center_horizontal|end"
+                android:paddingStart="0dp"
+                android:paddingEnd="6dp"
                 android:paddingBottom="6dp" />
 
         </LinearLayout>
@@ -117,7 +118,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:text="Loading..."
             android:visibility="gone"
             android:background="@color/theme_blue_dark"
             android:textColor="@color/abc_secondary_text_material_dark"

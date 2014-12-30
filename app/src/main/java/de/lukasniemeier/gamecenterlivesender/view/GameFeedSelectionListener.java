@@ -67,6 +67,7 @@ public class GameFeedSelectionListener implements GameAdapter.OnGameClickedListe
         }
 
         MaterialDialog dialog = new MaterialDialog.Builder(context)
+                .title(context.getString(R.string.select_feed))
                 .adapter(new FeedAdapter(context, imageFetcher, awayTeam, homeTeam, feeds))
                 .build();
         ListView listView = dialog.getListView();

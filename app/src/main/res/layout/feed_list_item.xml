@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/md_dialog_frame_margin"
     android:paddingRight="@dimen/md_dialog_frame_margin"
-    android:background="#fefefe">
+    android:background="#fefefe"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -14,7 +15,7 @@
         android:minHeight="@dimen/md_listitem_height"
         android:id="@+id/team_icon"
         android:layout_gravity="center_horizontal"
-        android:contentDescription="Logo" />
+        android:contentDescription="@string/logo" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,8 +24,8 @@
         android:textSize="@dimen/md_listitem_textsize"
         tools:text="Boston Bruins"
         android:id="@+id/feed_name"
-        android:layout_gravity="right"
-        android:gravity="center_vertical|left"
-        android:layout_marginLeft="6dp"
+        android:layout_gravity="end"
+        android:gravity="center_vertical|start"
+        android:layout_marginStart="6dp"
         style="@style/TextAppearance.AppCompat.Large" />
 </LinearLayout>
