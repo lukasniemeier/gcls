@@ -3,3 +3,4 @@
 resValue "string", "receiver_application_id", "MY_RECEIVER_ID"
 buildConfigField "String", "GCL_USER", "\"my_username\""
 buildConfigField "String", "GCL_PASSWORD", "\"my_password\""
+buildConfigField "String", "CORS_PROXY_URL", "\"https://your.cors.proxy.com/\""

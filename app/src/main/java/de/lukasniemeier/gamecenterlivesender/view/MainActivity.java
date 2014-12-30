@@ -1,6 +1,5 @@
 package de.lukasniemeier.gamecenterlivesender.view;
 
-import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,11 +12,12 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.gms.common.images.WebImage;
@@ -30,7 +30,6 @@ import com.google.sample.castcompanionlibrary.cast.BaseCastManager;
 import com.google.sample.castcompanionlibrary.cast.VideoCastManager;
 import com.google.sample.castcompanionlibrary.widgets.MiniController;
 
-import org.apache.http.cookie.Cookie;
 import org.droidparts.Injector;
 import org.droidparts.annotation.inject.InjectView;
 import org.droidparts.net.http.RESTClient2;
@@ -149,7 +148,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("");
+        toolbar.setTitle(getString(R.string.games));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
@@ -205,8 +204,10 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            SettingsActivity.startActivity(this);
+        if (id == R.id.action_custom_game) {
+            if (castManager.isConnected()) {
+                new CustomGameDialog(this, (game, url) -> startCasting(game, url)).show();
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);

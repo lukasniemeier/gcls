@@ -3,17 +3,20 @@ package de.lukasniemeier.gamecenterlivesender.view;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.list.ItemProcessor;
 import com.google.sample.castcompanionlibrary.cast.VideoCastManager;
 
 import org.droidparts.net.image.ImageFetcher;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.lukasniemeier.gamecenterlivesender.CoreApplication;
@@ -50,55 +53,29 @@ public class GameFeedSelectionListener implements GameAdapter.OnGameClickedListe
             return;
         }
 
-        String awayTeam = game.getGameInformation().getAwayTeam().getTeamAbb();
-        String homeTeam = game.getGameInformation().getHomeTeam().getTeamAbb();
-        boolean hasCondesed = game.getGameHighlightVideo() != null &&
+        Team awayTeam = dataManager.getTeam(game.getGameInformation().getAwayTeam().getTeamAbb());
+        Team homeTeam = dataManager.getTeam(game.getGameInformation().getHomeTeam().getTeamAbb());
+        boolean hasCondensed = game.getGameHighlightVideo() != null &&
                 Boolean.TRUE.equals(game.getGameHighlightVideo().getHasCondensedVideo());
 
-        Map<String, Feed> itemMap = new HashMap<>();
-        itemMap.put(String.format("%s;%s", awayTeam, Feed.FeedType.LIVE.code()),
-                new Feed(Feed.FeedTarget.AWAY, Feed.FeedType.LIVE));
-        itemMap.put(String.format("%s;%s", homeTeam, Feed.FeedType.LIVE.code()),
-                new Feed(Feed.FeedTarget.HOME, Feed.FeedType.LIVE));
-        if (hasCondesed) {
-            itemMap.put(String.format("%s;%s", awayTeam, Feed.FeedType.CONDENSED.code()),
-                    new Feed(Feed.FeedTarget.AWAY, Feed.FeedType.CONDENSED));
-            itemMap.put(String.format("%s;%s", homeTeam, Feed.FeedType.CONDENSED.code()),
-                    new Feed(Feed.FeedTarget.HOME, Feed.FeedType.CONDENSED));
+        List<Feed> feeds = new ArrayList<>(4);
+        feeds.add(new Feed(Feed.FeedTarget.AWAY, Feed.FeedType.LIVE));
+        feeds.add(new Feed(Feed.FeedTarget.HOME, Feed.FeedType.LIVE));
+        if (hasCondensed) {
+            feeds.add(new Feed(Feed.FeedTarget.AWAY, Feed.FeedType.CONDENSED));
+            feeds.add(new Feed(Feed.FeedTarget.HOME, Feed.FeedType.CONDENSED));
         }
 
-        new MaterialDialog.Builder(context)
-                .title("Choose feed")
-                .items(itemMap.keySet().toArray(new String[0]))
-                .itemProcessor(new ItemProcessor(context) {
-                    @Override
-                    protected int getLayout(int index) {
-                        return R.layout.feed_list_item;
-                    }
-
-                    @Override
-                    protected void onViewInflated(int index, String feedKey, View view) {
-                        ImageView teamIcon = (ImageView) view.findViewById(R.id.team_icon);
-                        TextView feedName = (TextView) view.findViewById(R.id.feed_name);
-
-                        String teamCode = feedKey.split(";")[0];
-                        String feedType = feedKey.split(";")[1];
-
-                        Team team = dataManager.getTeam(teamCode);
-                        imageFetcher.attachImage(team.getLogoURL(), teamIcon);
-                        feedName.setText(String.format("%s (%s)",
-                                team.getCity(), feedType));
-                    }
-                })
-                .itemsCallback((materialDialog, view, index, text) -> {
-                    Feed feed = itemMap.get(text);
-                    if (feed != null) {
-                        listener.onFeedSelected(game, feed);
-                    } else {
-                        Log.w(TAG, "Invalid feed selection.");
-                    }
-                })
-                .build().show();
+        MaterialDialog dialog = new MaterialDialog.Builder(context)
+                .adapter(new FeedAdapter(context, imageFetcher, awayTeam, homeTeam, feeds))
+                .build();
+        ListView listView = dialog.getListView();
+        assert listView != null;
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            dialog.cancel();
+            listener.onFeedSelected(game, feeds.get(position));
+        });
+        dialog.show();
     }
 
     private VideoCastManager getCastManager() {

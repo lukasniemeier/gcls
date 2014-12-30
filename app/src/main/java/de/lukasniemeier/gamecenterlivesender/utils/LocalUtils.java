@@ -10,6 +10,12 @@ import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import de.lukasniemeier.gamecenterlivesender.model.games.AwayTeam;
+import de.lukasniemeier.gamecenterlivesender.model.games.Game;
+import de.lukasniemeier.gamecenterlivesender.model.games.GameInformation;
+import de.lukasniemeier.gamecenterlivesender.model.games.GameLiveVideo;
+import de.lukasniemeier.gamecenterlivesender.model.games.HomeTeam;
+
 public class LocalUtils {
 
     public static DateTime parseDateTimeEst(String gameTimeEst) {
@@ -23,4 +29,5 @@ public class LocalUtils {
         JsonParser parser = new JsonParser();
         return (T) parser.parse(json);
     }
+
 }

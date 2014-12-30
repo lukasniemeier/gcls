@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/md_dialog_frame_margin"
     android:paddingRight="@dimen/md_dialog_frame_margin"
-    android:clickable="true"
     android:background="#fefefe">
 
     <ImageView

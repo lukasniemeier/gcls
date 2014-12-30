@@ -11,5 +11,10 @@
     <string name="error_unable_login">Unable to login</string>
     <string name="error_error">Error: %1$s</string>
     <string name="stream_sub_info">NHLGC</string>
+    <string name="games">Games</string>
+    <string name="custom_game">Custom Game</string>
+    <string name="live">Live</string>
+    <string name="proxy">Proxy</string>
+    <string name="url">URL</string>
 
 </resources>

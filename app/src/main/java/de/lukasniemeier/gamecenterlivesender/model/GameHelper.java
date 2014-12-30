@@ -1,8 +1,11 @@
 package de.lukasniemeier.gamecenterlivesender.model;
 
+import de.lukasniemeier.gamecenterlivesender.model.games.AwayTeam;
 import de.lukasniemeier.gamecenterlivesender.model.games.Game;
 import de.lukasniemeier.gamecenterlivesender.model.games.GameHighlightVideo;
+import de.lukasniemeier.gamecenterlivesender.model.games.GameInformation;
 import de.lukasniemeier.gamecenterlivesender.model.games.GameLiveVideo;
+import de.lukasniemeier.gamecenterlivesender.model.games.HomeTeam;
 
 public class GameHelper {
 
@@ -27,5 +30,23 @@ public class GameHelper {
                     Boolean.TRUE.equals(video.getHasLiveHomeVideo());
         }
         return false;
+    }
+
+    public static Game fakeGame(boolean isLive) {
+        Game customGame = new Game();
+
+        GameInformation information = new GameInformation();
+        AwayTeam awayTeam = new AwayTeam();
+        awayTeam.setTeamName("NN");
+        HomeTeam homeTeam = new HomeTeam();
+        homeTeam.setTeamName("NN");
+        information.setAwayTeam(awayTeam);
+        information.setHomeTeam(homeTeam);
+        customGame.setGameInformation(information);
+
+        GameLiveVideo liveVideo = new GameLiveVideo();
+        liveVideo.setHasLiveAwayVideo(isLive);
+        customGame.setGameLiveVideo(liveVideo);
+        return customGame;
     }
 }
