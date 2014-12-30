@@ -47,7 +47,7 @@ public class CustomGameDialog {
                             url = BuildConfig.CORS_PROXY_URL + url;
                         }
 
-                        castCallback.accept(customGame, streamUrlInput.getText().toString());
+                        castCallback.accept(customGame, url);
                     }
                 })
                 .build();
