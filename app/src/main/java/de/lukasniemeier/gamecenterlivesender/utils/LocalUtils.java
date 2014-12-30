@@ -1,6 +1,10 @@
 package de.lukasniemeier.gamecenterlivesender.utils;
 
 
+import android.app.Activity;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.TypedValue;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -28,6 +32,13 @@ public class LocalUtils {
     public static <T extends JsonElement> T parseJson(String json) {
         JsonParser parser = new JsonParser();
         return (T) parser.parse(json);
+    }
+
+    public static void fixSwipeLayoutProgress(Activity activity , SwipeRefreshLayout swipeRefreshLayout) {
+        TypedValue typed_value = new TypedValue();
+        activity.getTheme().resolveAttribute(android.support.v7.appcompat.R.attr.actionBarSize, typed_value, true);
+        int size = activity.getResources().getDimensionPixelSize(typed_value.resourceId);
+        swipeRefreshLayout.setProgressViewOffset(false, -size, size);
     }
 
 }

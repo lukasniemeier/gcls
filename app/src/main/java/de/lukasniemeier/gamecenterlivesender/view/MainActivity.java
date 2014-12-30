@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -121,6 +122,7 @@ public class MainActivity extends ActionBarActivity {
         setupToolbar();
         setupCastManager();
         setupList();
+        LocalUtils.fixSwipeLayoutProgress(this, swipeContainer);
         refreshData();
     }
 
