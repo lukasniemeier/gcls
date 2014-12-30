@@ -143,7 +143,7 @@ public class MainActivity extends ActionBarActivity {
         castManager = CoreApplication.getVideoCastManager(this);
         castConsumer = new SimpleVideoCastConsumer(this);
         castManager.addMiniController(miniController);
-        castManager.reconnectSessionIfPossible(this, true);
+        castManager.reconnectSessionIfPossible(5);
     }
 
     private void setupToolbar() {

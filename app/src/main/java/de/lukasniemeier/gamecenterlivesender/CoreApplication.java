@@ -36,7 +36,6 @@ public class CoreApplication extends Application {
                             VideoCastManager.FEATURE_DEBUGGING);
             castManager.setStopOnDisconnect(true);
         }
-        castManager.setContext(ctx);
         return castManager;
     }
 
