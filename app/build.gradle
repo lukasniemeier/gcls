@@ -33,5 +33,5 @@ dependencies {
 
     //compile 'org.droidparts:droidparts:2.7.2'
     compile 'net.danlew:android.joda:2.5.0'
-    compile 'com.afollestad:material-dialogs:0.5.1'
+    compile 'com.afollestad:material-dialogs:0.7.2.4'
 }

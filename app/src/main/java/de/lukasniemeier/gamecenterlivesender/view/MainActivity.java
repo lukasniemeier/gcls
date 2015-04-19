@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.gms.common.images.WebImage;
@@ -48,6 +49,7 @@ import de.lukasniemeier.gamecenterlivesender.data.InMemoryDataManager;
 import de.lukasniemeier.gamecenterlivesender.data.ReadWriteDataManager;
 import de.lukasniemeier.gamecenterlivesender.http.GetHttpTask;
 import de.lukasniemeier.gamecenterlivesender.http.HttpTask;
+import de.lukasniemeier.gamecenterlivesender.http.Task;
 import de.lukasniemeier.gamecenterlivesender.http.TaskFactory;
 import de.lukasniemeier.gamecenterlivesender.model.Feed;
 import de.lukasniemeier.gamecenterlivesender.model.GameHelper;
@@ -291,12 +293,32 @@ public class MainActivity extends ActionBarActivity {
         Functional.Consumer<String> startCastingFunc = path -> startCasting(game, path);
 
         TaskFactory factory = new TaskFactory(this, restClient, statusBar);
-        HttpTask login = factory.createLoginTask(BuildConfig.GCL_USER, BuildConfig.GCL_PASSWORD,
-                factory.createPublishTask(publishPointUrl, startCastingFunc));
-        HttpTask publish1st = factory.createPublishTaskWithFallback(login, publishPointUrl,
-                startCastingFunc);
 
-        publish1st.execute();
+        Task interactiveLogin = () -> new MaterialDialog.Builder(MainActivity.this)
+                .title(R.string.login)
+                .positiveText(R.string.login)
+                .negativeText(R.string.cancel)
+                .customView(R.layout.login, true)
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        View view = dialog.getCustomView();
+                        TextView usernameView = (TextView) view.findViewById(R.id.login_username);
+                        TextView passwordView = (TextView) view.findViewById(R.id.login_password);
+
+                        factory.createLoginTask(
+                                usernameView.getText().toString(),
+                                passwordView.getText().toString(),
+                                factory.createPublishTask(publishPointUrl, startCastingFunc))
+                                .execute();
+                    }
+                })
+                .build()
+                .show();
+
+        factory.createPublishTaskWithFallback(interactiveLogin,
+                publishPointUrl, startCastingFunc)
+                .execute();
     }
 
     private void startCasting(Game game, String path) {

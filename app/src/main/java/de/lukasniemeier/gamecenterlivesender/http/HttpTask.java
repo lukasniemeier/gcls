@@ -9,7 +9,7 @@ import org.droidparts.net.http.RESTClient2;
 
 import de.lukasniemeier.gamecenterlivesender.utils.Functional;
 
-public abstract class HttpTask extends SimpleAsyncTask<HTTPResponse> {
+public abstract class HttpTask extends SimpleAsyncTask<HTTPResponse> implements Task {
 
     protected final RESTClient2 restClient;
 
@@ -35,6 +35,11 @@ public abstract class HttpTask extends SimpleAsyncTask<HTTPResponse> {
         this.restClient = restClient;
         this.url = url;
         this.preFunction = preFunction;
+    }
+
+    @Override
+    public void execute() {
+        super.execute();
     }
 
     @Override

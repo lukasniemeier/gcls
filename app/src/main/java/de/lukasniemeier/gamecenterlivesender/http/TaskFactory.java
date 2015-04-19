@@ -65,7 +65,7 @@ public class TaskFactory {
                 });
     }
 
-    public HttpTask createPublishTaskWithFallback(final HttpTask fallbackTask, String url, Functional.Consumer<String> castConsumer) {
+    public HttpTask createPublishTaskWithFallback(final Task fallbackTask, String url, Functional.Consumer<String> castConsumer) {
         return createPublish(url, castConsumer, exception -> {
             Log.w(TAG, "Publish task failed, falling back", exception);
             fallbackTask.execute();
@@ -97,10 +97,7 @@ public class TaskFactory {
         formData.put("nosublink", "true");
         return new PostHttpTask(formData, restClient, context.getString(R.string.login_url), context,
                 createStatusFunc("Logging in..."),
-                response -> {
-                    response.headers.get("Set-Cookie");
-                    publishTask.execute();
-                },
+                response -> publishTask.execute(),
                 exception -> showErrorToast(context.getString(R.string.error_unable_login), exception));
     }
 

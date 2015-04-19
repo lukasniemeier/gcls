@@ -31,7 +31,7 @@ public class CustomGameDialog {
         MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .title(R.string.custom_game)
                 .customView(R.layout.custom_feed, true)
-                .positiveText("Stream")
+                .positiveText(R.string.stream)
                 .callback(new MaterialDialog.ButtonCallback() {
                     @Override
                     public void onPositive(MaterialDialog dialog) {

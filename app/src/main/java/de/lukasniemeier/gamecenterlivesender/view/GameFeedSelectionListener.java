@@ -1,6 +1,7 @@
 package de.lukasniemeier.gamecenterlivesender.view;
 
 import android.app.Activity;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -58,14 +59,12 @@ public class GameFeedSelectionListener implements GameAdapter.OnGameClickedListe
 
         MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .title(context.getString(R.string.select_feed))
-                .adapter(new FeedAdapter(context, imageFetcher, awayTeam, homeTeam, feeds))
+                .adapter(new FeedAdapter(context, imageFetcher, awayTeam, homeTeam, feeds),
+                        (materialDialog, view, i, charSequence) -> {
+                            materialDialog.cancel();
+                            listener.onFeedSelected(game, feeds.get(i));
+                })
                 .build();
-        ListView listView = dialog.getListView();
-        assert listView != null;
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            dialog.cancel();
-            listener.onFeedSelected(game, feeds.get(position));
-        });
         dialog.show();
     }
 }
