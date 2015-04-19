@@ -1,31 +1,22 @@
 package de.lukasniemeier.gamecenterlivesender.view;
 
 import android.app.Activity;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.google.sample.castcompanionlibrary.cast.VideoCastManager;
+import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
 
 import org.droidparts.net.image.ImageFetcher;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import de.lukasniemeier.gamecenterlivesender.CoreApplication;
 import de.lukasniemeier.gamecenterlivesender.R;
 import de.lukasniemeier.gamecenterlivesender.data.DataManager;
 import de.lukasniemeier.gamecenterlivesender.model.Feed;
 import de.lukasniemeier.gamecenterlivesender.model.games.Game;
 import de.lukasniemeier.gamecenterlivesender.model.teams.Team;
-import de.lukasniemeier.gamecenterlivesender.utils.Functional;
 
 public class GameFeedSelectionListener implements GameAdapter.OnGameClickedListener {
 
@@ -33,7 +24,6 @@ public class GameFeedSelectionListener implements GameAdapter.OnGameClickedListe
         void onFeedSelected(Game game, Feed feed);
     }
 
-    private static final String TAG = GameFeedSelectionListener.class.getSimpleName();
     private Activity context;
     private DataManager dataManager;
     private FeedSelectionListener listener;
@@ -48,7 +38,7 @@ public class GameFeedSelectionListener implements GameAdapter.OnGameClickedListe
 
     @Override
     public void onGameClicked(final Game game) {
-        if (!getCastManager().isConnected()) {
+        if (!VideoCastManager.getInstance().isConnected()) {
             Toast.makeText(context, "Connect to Chromecast first", Toast.LENGTH_LONG).show();
             return;
         }
@@ -77,9 +67,5 @@ public class GameFeedSelectionListener implements GameAdapter.OnGameClickedListe
             listener.onFeedSelected(game, feeds.get(position));
         });
         dialog.show();
-    }
-
-    private VideoCastManager getCastManager() {
-        return CoreApplication.getVideoCastManager(context);
     }
 }

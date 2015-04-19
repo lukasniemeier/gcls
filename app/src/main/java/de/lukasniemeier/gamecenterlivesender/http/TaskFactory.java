@@ -11,7 +11,6 @@ import android.widget.Toast;
 import org.droidparts.contract.HTTP;
 import org.droidparts.net.http.HTTPException;
 import org.droidparts.net.http.RESTClient2;
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -67,7 +66,10 @@ public class TaskFactory {
     }
 
     public HttpTask createPublishTaskWithFallback(final HttpTask fallbackTask, String url, Functional.Consumer<String> castConsumer) {
-        return createPublish(url, castConsumer, exception -> fallbackTask.execute());
+        return createPublish(url, castConsumer, exception -> {
+            Log.w(TAG, "Publish task failed, falling back", exception);
+            fallbackTask.execute();
+        });
     }
 
     private HttpTask createPublish(String url, Functional.Consumer<String> castConsumer, Functional.Consumer<Exception> failureFunction) {
@@ -95,7 +97,10 @@ public class TaskFactory {
         formData.put("nosublink", "true");
         return new PostHttpTask(formData, restClient, context.getString(R.string.login_url), context,
                 createStatusFunc("Logging in..."),
-                response -> publishTask.execute(),
+                response -> {
+                    response.headers.get("Set-Cookie");
+                    publishTask.execute();
+                },
                 exception -> showErrorToast(context.getString(R.string.error_unable_login), exception));
     }
 

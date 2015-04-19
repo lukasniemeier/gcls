@@ -6,8 +6,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.0.0'
-        classpath 'me.tatarka:gradle-retrolambda:2.4.1'
+        classpath 'com.android.tools.build:gradle:1.1.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.0.1'
     }
 }
 

@@ -98,7 +98,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
                     game.getGameInformation().getHomeTeam().getTeamAbb());
 
             String gameTimeEst = game.getGameInformation().getEasternGameTime();
-            DateTime estTime = LocalUtils.parseDateTimeEst(gameTimeEst);
+            DateTime estTime = LocalUtils.parseDateTimeEastern(gameTimeEst);
 
             parentView.setTag(game);
             timeText.setText(fmt.print(estTime));

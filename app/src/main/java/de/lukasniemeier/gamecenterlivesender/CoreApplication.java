@@ -4,8 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.preference.PreferenceManager;
 
-import com.google.sample.castcompanionlibrary.cast.VideoCastManager;
-import com.google.sample.castcompanionlibrary.utils.Utils;
+import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -23,7 +22,7 @@ public class CoreApplication extends Application {
 
     private static VideoCastManager castManager;
 
-    public static VideoCastManager getVideoCastManager(Context ctx) {
+    private static VideoCastManager initializeVideoCastManager(Context ctx) {
         if (castManager == null) {
             castManager = VideoCastManager.initialize(
                     ctx,
@@ -54,8 +53,7 @@ public class CoreApplication extends Application {
 
         PreferenceManager.setDefaultValues(this, R.xml.preference_login, false);
 
-        Utils.saveFloatToPreference(getApplicationContext(),
-                VideoCastManager.PREFS_KEY_VOLUME_INCREMENT, (float) VOLUME_INCREMENT);
+        initializeVideoCastManager(getApplicationContext());
     }
 }
 

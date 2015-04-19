@@ -8,28 +8,24 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.gms.common.images.WebImage;
+import com.google.android.libraries.cast.companionlibrary.cast.BaseCastManager;
+import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
+import com.google.android.libraries.cast.companionlibrary.widgets.MiniController;
 import com.google.common.collect.Iterables;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.sample.castcompanionlibrary.cast.BaseCastManager;
-import com.google.sample.castcompanionlibrary.cast.VideoCastManager;
-import com.google.sample.castcompanionlibrary.widgets.MiniController;
 
 import org.droidparts.Injector;
 import org.droidparts.annotation.inject.InjectView;
@@ -118,6 +114,7 @@ public class MainActivity extends ActionBarActivity {
 
         this.dataManager = new InMemoryDataManager();
         this.restClient = new RESTClient2(this, CoreApplication.USER_AGENT);
+        restClient.setCookieCacheEnabled(true, true);
 
         setupToolbar();
         setupCastManager();
@@ -142,10 +139,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void setupCastManager() {
-        castManager = CoreApplication.getVideoCastManager(this);
+        castManager = VideoCastManager.getInstance();
         castConsumer = new SimpleVideoCastConsumer(this);
         castManager.addMiniController(miniController);
-        castManager.reconnectSessionIfPossible(5);
+        castManager.reconnectSessionIfPossible(10);
     }
 
     private void setupToolbar() {
@@ -157,7 +154,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onResume() {
-        castManager = CoreApplication.getVideoCastManager(this);
+        castManager = VideoCastManager.getInstance();
         if (null != castManager) {
             castManager.addVideoCastConsumer(castConsumer);
             castManager.incrementUiCounter();
@@ -191,7 +188,6 @@ public class MainActivity extends ActionBarActivity {
         if (null != castManager) {
             miniController.removeOnMiniControllerChangedListener(castManager);
             castManager.removeMiniController(miniController);
-            castManager.clearContext(this);
         }
         super.onDestroy();
     }
@@ -209,6 +205,8 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_custom_game) {
             if (castManager.isConnected()) {
                 new CustomGameDialog(this, (game, url) -> startCasting(game, url)).show();
+            } else {
+                Toast.makeText(this, "Connect to Chromecast first", Toast.LENGTH_LONG).show();
             }
             return true;
         }
@@ -303,9 +301,6 @@ public class MainActivity extends ActionBarActivity {
 
     private void startCasting(Game game, String path) {
 
-        CookieManager manager = (CookieManager) CookieHandler.getDefault();
-        List<HttpCookie> cookies = manager.getCookieStore().getCookies();
-
         MediaInfo info = buildMediaInfo(
                 String.format("%s@%s",
                         game.getGameInformation().getAwayTeam().getTeamName(),
@@ -313,7 +308,7 @@ public class MainActivity extends ActionBarActivity {
                 getString(R.string.stream_sub_info),
                 path,
                 GameHelper.gameIsLive(game));
-        castManager.startCastControllerActivity(this, info, 0, true);
+        castManager.startVideoCastControllerActivity(this, info, 0, true);
     }
 
 }
