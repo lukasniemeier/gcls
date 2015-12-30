@@ -3,11 +3,9 @@ package de.lukasniemeier.gamecenterlivesender;
 import android.app.Application;
 import android.content.Context;
 import android.preference.PreferenceManager;
-
+import com.google.android.libraries.cast.companionlibrary.cast.CastConfiguration;
 import com.google.android.libraries.cast.companionlibrary.cast.VideoCastManager;
-
 import net.danlew.android.joda.JodaTimeAndroid;
-
 import org.joda.time.DateTimeZone;
 
 import java.net.CookieHandler;
@@ -24,15 +22,14 @@ public class CoreApplication extends Application {
 
     private static VideoCastManager initializeVideoCastManager(Context ctx) {
         if (castManager == null) {
-            castManager = VideoCastManager.initialize(
-                    ctx,
-                    APPLICATION_ID,
-                    null,
-                    ctx.getString(R.string.receiver_data_channel));
-            castManager.enableFeatures(
-                    VideoCastManager.FEATURE_NOTIFICATION |
-                            VideoCastManager.FEATURE_WIFI_RECONNECT |
-                            VideoCastManager.FEATURE_DEBUGGING);
+            final CastConfiguration configuration = new CastConfiguration.Builder(APPLICATION_ID)
+                    .addNamespace(ctx.getString(R.string.receiver_data_channel))
+                    .enableNotification()
+                    .enableWifiReconnection()
+                    .enableDebug()
+                    .build();
+
+            castManager = VideoCastManager.initialize(ctx, configuration);
             castManager.setStopOnDisconnect(true);
         }
         return castManager;

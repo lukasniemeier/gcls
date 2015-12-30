@@ -143,7 +143,6 @@ public class MainActivity extends ActionBarActivity {
     private void setupCastManager() {
         castManager = VideoCastManager.getInstance();
         castConsumer = new SimpleVideoCastConsumer(this);
-        castManager.addMiniController(miniController);
         castManager.reconnectSessionIfPossible(10);
     }
 
@@ -183,15 +182,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onStop() {
         statusBar.setVisibility(View.GONE);
         super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (null != castManager) {
-            miniController.removeOnMiniControllerChangedListener(castManager);
-            castManager.removeMiniController(miniController);
-        }
-        super.onDestroy();
     }
 
     @Override

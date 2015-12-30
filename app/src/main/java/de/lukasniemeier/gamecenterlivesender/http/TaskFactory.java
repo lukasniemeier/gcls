@@ -57,7 +57,7 @@ public class TaskFactory {
                     String message = context.getString(R.string.error_cast_generic);
                     if (exception instanceof HTTPException) {
                         HTTPException httpException = (HTTPException) exception;
-                        if (httpException.getResponseCode() == HTTP.ResponseCode.SC_BAD_REQUEST) {
+                        if (httpException.getResponseCode() == 400) {
                             message = context.getString(R.string.error_missing_feed);
                         }
                     }

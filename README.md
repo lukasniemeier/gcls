@@ -15,16 +15,16 @@ Take the following steps to build and deploy the application:
 
  * Install Android SDK components
  * Clone the [Chromecast Companion Library](https://github.com/googlecast/CastCompanionLibrary-android)
- into a folder *parent* as *parent/CastCompanionLibrary* (Version 1.12)
+ into a folder *parent* as *parent/CastCompanionLibrary* (Version 2.7.0)
  * Clone this repository into the folder *parent* as *parent/gcls*
  * Setup the receiver application **gcls-receiver** (see corresponding README) and retrieve an *Application ID*
- * Use *app/config.gradle.template* to create a *app/config.gradle* fitting your *Application ID* and Gamecenter Live subscription
+ * Use *app/config.gradle.template* to create a *app/config.gradle* fitting your *Application ID*
  * Build using gradle and deploy the APK
 
 Security Considerations
 --------------------------------
 
-Currently the app stores your Gamecenter Live subscription in plain text (see build instructions).
+The app does not store your Gamecenter Live subscription credentials. You have to enter them every time.
 
 Referenced libraries
 --------------------------------
